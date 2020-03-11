@@ -5,6 +5,7 @@ import com.example.kube.demo.exception.PersonException;
 import com.example.kube.demo.model.Person;
 import com.example.kube.demo.service.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,7 +18,10 @@ public class PersonServiceImpl implements IPersonService {
 
     @Override
     public Person getPersonByName(String name) throws PersonException {
-        return personRepository.findById(name).orElseThrow(PersonException::new);
+        Person person = new Person();
+        person.setName(name);
+        Example<Person> personExample = Example.of(person);
+        return personRepository.findOne(personExample).orElseThrow(PersonException::new);
     }
 
     @Override
