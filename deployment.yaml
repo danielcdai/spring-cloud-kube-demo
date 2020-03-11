@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-demo
+  labels:
+    app: kube-demo
+spec:
+  selector:
+    matchLabels:
+      app: kube-demo
+  template:
+    metadata:
+      name: kube-demo
+      labels:
+        app: kube-demo
+    spec:
+      containers:
+        - name: kube-demo
+          image: danielcdai/kube-demo:1.0.2
+          ports:
+            - name: http
+              containerPort: 8080
+              hostPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            initialDelaySeconds: 25
+            periodSeconds: 5
+        - name: mongo
+          image: mongo
