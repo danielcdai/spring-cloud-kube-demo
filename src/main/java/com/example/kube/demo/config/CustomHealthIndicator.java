@@ -9,6 +9,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 @Component
+@SuppressWarnings({"UnusedDeclaration"})
 public class CustomHealthIndicator implements HealthIndicator {
 
     private boolean isHealthy = true;
