@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.backoffice.service;
 
 public interface IPostService {
 
